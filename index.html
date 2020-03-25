@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">  
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+  
+<div>
+  <v-app id="app">
+    <v-data-table :headers="headers" :items="users" sort-by="id" :search="search" class="elevation-2">
+      <template v-slot:top>
+        <v-system-bar color="teal darken-4"></v-system-bar>
+        <v-toolbar flat color="teal darken-3">
+          <v-toolbar-title class="white--text">Vuetify CRUD</v-toolbar-title>
+          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-spacer></v-spacer>
+          <v-dialog v-model="dialog" max-width="500px">
+            <template v-slot:activator="{ on }">
+              <v-btn :elevation="4" color="teal" fab dark class="mx-4" v-on="on"><v-icon dark>mdi-plus</v-icon></v-btn>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="headline">{{ formTitle }}</span>
+              </v-card-title>
+  
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <!--
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.id" label="Id"></v-text-field>
+                    </v-col>
+                    -->
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.email" label="Email"></v-text-field>
+                    </v-col>                    
+                  </v-row>
+                </v-container>
+              </v-card-text>
+  
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="teal darken-1" text @click="close">Cancel</v-btn>
+                <v-btn color="teal darken-1" text @click="save">Save</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-toolbar>
+
+        <v-col cols="12" sm="12">
+            <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
+        </v-col>
+
+      </template>
+      <template v-slot:item.actions="{ item }">
+        <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil</v-icon>
+        <v-icon small @click="deleteItem(item)"> mdi-delete</v-icon>
+      </template>      
+    </v-data-table>
+
+    <template>
+        <div class="text-center ma-2">
+        <v-snackbar v-model="snackbar">
+          {{ textSnack }}
+          <v-btn color="info" text @click="snackbar = false">Close</v-btn>
+        </v-snackbar>
+        </div>
+    </template>    
+
+  </v-app>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script src="users_vue.js"></script>
+</body>
+</html>

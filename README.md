@@ -10,4 +10,4 @@ Esta es una aplicación CRUD simple utilizando:
 - MySQL
 
 ## Demo
-![Demostracion GIF](extras/demo.gif)
+![Demostracion GIF](Extras/demo.gif)
